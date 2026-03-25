@@ -36,15 +36,15 @@ const LabNotebook = ({ notes, language, onUpdateNote }) => {
                 animate={{ opacity: 1, x: 0 }}
                 className="group relative"
               >
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/[0.07] transition-all">
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="text-[9px] font-black text-purple-400 uppercase tracking-widest">{note.type} • {note.reagent}</span>
-                    <span className="text-[9px] text-slate-600 font-mono">#{notes.length - idx}</span>
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/[0.07] transition-all">
+                  <div className="flex justify-between items-start mb-3">
+                    <span className="text-[10px] font-black text-purple-400 uppercase tracking-widest">{note.type} • {note.reagent}</span>
+                    <span className="text-[10px] text-slate-600 font-mono">#{notes.length - idx}</span>
                   </div>
                   
-                  <div className="space-y-3">
-                    <div className="p-3 rounded-xl bg-black/20 border border-white/5">
-                      <p className="text-[11px] text-slate-300 inline">
+                  <div className="space-y-6">
+                    <div className="p-5 rounded-xl bg-black/20 border border-white/5">
+                      <p className="text-xl text-slate-200 inline leading-relaxed">
                          <strong>{t.notebook.observation}:</strong> {note.observation}
                       </p>
                     </div>
@@ -54,12 +54,12 @@ const LabNotebook = ({ notes, language, onUpdateNote }) => {
                         value={note.justification || ""}
                         onChange={(e) => onUpdateNote(idx, e.target.value)}
                         placeholder={t.notebook.placeholder}
-                        className="w-full bg-transparent border border-white/5 rounded-xl p-3 text-[11px] text-slate-400 focus:outline-none focus:border-purple-500/50 min-h-[60px] resize-none"
+                        className="w-full bg-transparent border border-white/5 rounded-2xl p-6 text-lg text-slate-300 focus:outline-none focus:border-purple-500/50 min-h-[120px] resize-none leading-relaxed"
                       />
                     </div>
                     
                     {note.equation && (
-                      <div className="text-[10px] font-mono p-2 bg-slate-950/80 rounded-lg text-emerald-400 border border-emerald-500/10">
+                      <div className="text-sm font-mono p-3 bg-slate-950/80 rounded-lg text-emerald-400 border border-emerald-500/10">
                          {note.equation.split(' ').map((part, i) => (
                             <span key={i} className={part.includes('(') ? 'font-black underline' : ''}>
                                {part}{' '}

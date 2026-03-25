@@ -50,6 +50,6 @@ export function calculateNewMolarity(currentMolarity, reagent, volume) {
 
 export function calculateChromateEquilibrium(ph) {
   // Punto de viraxe logarítmico arredor de pH 6.5
-  const transition = 1 / (1 + Math.exp(ph - 6.5)); 
-  return 1 - transition;
+  // Se pH < 6.5 (Ácido) -> transition debe ser alta (cara a Dicromato)
+  return 1 / (1 + Math.exp(ph - 6.5)); 
 }
