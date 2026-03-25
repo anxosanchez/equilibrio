@@ -4,7 +4,7 @@ import { Check, X, Info, BrainCircuit, Rocket } from 'lucide-react';
 import { Button } from './ui/button';
 import { TRANSLATIONS } from '../lib/translations';
 
-const TutorModal = ({ isOpen, type, data, language, onConfirm, onClose }) => {
+const TutorModal = ({ isOpen, type, data, language, setLanguage, onConfirm, onClose }) => {
   const [selectedHypothesis, setSelectedHypothesis] = useState(null);
   const t = TRANSLATIONS[language];
 
@@ -19,6 +19,33 @@ const TutorModal = ({ isOpen, type, data, language, onConfirm, onClose }) => {
         <div>
           <h2 className="text-2xl font-black tracking-tight text-white uppercase">{t.onboarding.title}</h2>
           <p className="text-sm text-slate-400 font-medium">{t.onboarding.subtitle}</p>
+        </div>
+      </div>
+
+      {/* Language Selection Step */}
+      <div className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+        <p className="text-xs font-black text-blue-400 uppercase tracking-widest text-center">
+          {language === 'gl' ? 'Selecciona o teu idioma' : 'Select your language'}
+        </p>
+        <div className="flex justify-center gap-8 py-2">
+           <button 
+             onClick={() => setLanguage('gl')}
+             className={`flex flex-col items-center gap-3 p-4 rounded-2xl transition-all ${language === 'gl' ? 'bg-blue-600/30 ring-2 ring-blue-500 shadow-xl' : 'bg-white/5 opacity-40 hover:opacity-100 hover:bg-white/10'}`}
+           >
+              <div className="w-16 h-10 overflow-hidden rounded-md shadow-md border border-white/10 bg-slate-800">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Flag_of_Galicia_%28civil%29.svg" alt="GL" className="w-full h-full object-cover" />
+              </div>
+              <span className="text-xs font-black uppercase tracking-wider text-slate-200">Galego</span>
+           </button>
+           <button 
+             onClick={() => setLanguage('en')}
+             className={`flex flex-col items-center gap-3 p-4 rounded-2xl transition-all ${language === 'en' ? 'bg-blue-600/30 ring-2 ring-blue-500 shadow-xl' : 'bg-white/5 opacity-40 hover:opacity-100 hover:bg-white/10'}`}
+           >
+              <div className="w-16 h-10 overflow-hidden rounded-md shadow-md border border-white/10 bg-slate-800">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="EN" className="w-full h-full object-cover" />
+              </div>
+              <span className="text-xs font-black uppercase tracking-wider text-slate-200">English</span>
+           </button>
         </div>
       </div>
 

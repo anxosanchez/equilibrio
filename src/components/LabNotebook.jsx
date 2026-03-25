@@ -42,9 +42,9 @@ const LabNotebook = ({ notes, language, onUpdateNote }) => {
                     <span className="text-[10px] text-slate-600 font-mono">#{notes.length - idx}</span>
                   </div>
                   
-                  <div className="space-y-6">
-                    <div className="p-5 rounded-xl bg-black/20 border border-white/5">
-                      <p className="text-xl text-slate-200 inline leading-relaxed">
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-xl bg-black/20 border border-white/5">
+                      <p className="text-lg text-slate-200 inline leading-relaxed">
                          <strong>{t.notebook.observation}:</strong> {note.observation}
                       </p>
                     </div>
@@ -54,7 +54,7 @@ const LabNotebook = ({ notes, language, onUpdateNote }) => {
                         value={note.justification || ""}
                         onChange={(e) => onUpdateNote(idx, e.target.value)}
                         placeholder={t.notebook.placeholder}
-                        className="w-full bg-transparent border border-white/5 rounded-2xl p-6 text-lg text-slate-300 focus:outline-none focus:border-purple-500/50 min-h-[120px] resize-none leading-relaxed"
+                        className="w-full bg-transparent border border-white/5 rounded-2xl p-5 text-base text-slate-300 focus:outline-none focus:border-purple-500/50 min-h-[100px] resize-none leading-relaxed"
                       />
                     </div>
                     

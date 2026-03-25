@@ -24,9 +24,9 @@ const TutorFooter = ({ progress, language }) => {
            {/* CC Icon */}
            <div className="opacity-50 hover:opacity-100 transition-opacity cursor-help">
               <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/1/12/Cc-by-nc-sa_euro_icon.svg" 
+                src="https://upload.wikimedia.org/wikipedia/commons/5/55/Cc_by-nc-sa_euro_icon.svg" 
                 alt="CC BY-NC-SA" 
-                className="h-5 brightness-150"
+                className="h-6"
               />
            </div>
            

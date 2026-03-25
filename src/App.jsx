@@ -39,6 +39,7 @@ const App = () => {
   const [hypothesisData, setHypothesisData] = useState(null);
   const [labNotes, setLabNotes] = useState([]);
   const [progress, setProgress] = useState(0);
+  const [dropBuffer, setDropBuffer] = useState(0);
 
   const t = TRANSLATIONS[language];
   const selectedTube = tubes.find(t => t.id === selectedTubeId);
@@ -57,7 +58,14 @@ const App = () => {
       return;
     }
 
-    setHypothesisData({ reagent });
+    // Permitimos 3 pingas antes de preguntar (Pedagoxía de exploración)
+    if (dropBuffer < 2) {
+      setDropBuffer(prev => prev + 1);
+      executeAddition(reagent);
+    } else {
+      setHypothesisData({ reagent });
+      setDropBuffer(0); // Reset para a seguinte serie
+    }
   };
 
   const handleConfirmHypothesis = (prediction) => {
@@ -145,6 +153,7 @@ const App = () => {
         isOpen={onboardingOpen} 
         type="ONBOARDING" 
         language={language}
+        setLanguage={setLanguage}
         onClose={() => { setOnboardingOpen(false); setCurrentStep(2); }} 
       />
       <TutorModal 
@@ -170,19 +179,8 @@ const App = () => {
 
         <div className="flex items-center gap-6">
           {/* Language Switcher */}
-          <div className="flex bg-white/5 rounded-xl border border-white/10 overflow-hidden p-1">
-             <button 
-               onClick={() => setLanguage('gl')}
-               className={`w-10 h-8 flex items-center justify-center rounded-lg transition-all ${language === 'gl' ? 'bg-white/10 ring-1 ring-white/20 shadow-lg' : 'opacity-40 hover:opacity-100 grayscale hover:grayscale-0'}`}
-             >
-                <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Flag_of_Galicia_%28civil%29.svg" alt="GL" className="w-6 shadow-sm" />
-             </button>
-             <button 
-               onClick={() => setLanguage('en')}
-               className={`w-10 h-8 flex items-center justify-center rounded-lg transition-all ${language === 'en' ? 'bg-white/10 ring-1 ring-white/20 shadow-lg' : 'opacity-40 hover:opacity-100 grayscale hover:grayscale-0'}`}
-             >
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="EN" className="w-6 shadow-sm" />
-             </button>
+          <div className="flex bg-white/5 rounded-xl border border-white/10 overflow-hidden p-1 opacity-0 pointer-events-none">
+             {/* Hidde switcher from Navbar as it space is requested to be in onboarding */}
           </div>
 
           <div className="h-6 w-[1px] bg-white/5" />
@@ -202,10 +200,10 @@ const App = () => {
         </div>
       </nav>
 
-      <main className="flex-grow p-10 grid grid-cols-12 gap-10 max-w-[1920px] mx-auto w-full overflow-hidden">
+      <main className="flex-grow p-10 grid grid-cols-12 gap-10 max-w-[2400px] mx-auto w-full overflow-hidden">
         
         {/* Left: Theory Sidebar & Reagents */}
-        <aside className="col-span-3 h-full overflow-hidden flex flex-col gap-8">
+        <aside className="col-span-4 h-full overflow-hidden flex flex-col gap-8">
            <TheorySidebar 
              currentStep={currentStep} 
              language={language}
@@ -215,8 +213,8 @@ const App = () => {
         </aside>
 
         {/* Center: Experiment & Lab Area */}
-        <div className="col-span-6 flex flex-col gap-10">
-          <section className="flex-grow glass-panel p-10 relative overflow-hidden flex flex-col items-center justify-center rounded-[2.5rem]">
+        <div className="col-span-4 flex flex-col gap-10">
+          <section className="flex-grow glass-panel p-10 relative overflow-hidden flex flex-col items-center justify-start pt-24 rounded-[2.5rem]">
              <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 0)', backgroundSize: '40px 40px' }} />
              
              <div className="grid grid-cols-3 gap-x-16 gap-y-24 relative z-10 w-full justify-items-center">
@@ -236,7 +234,7 @@ const App = () => {
         </div>
 
         {/* Right: Analytics & Notebook */}
-        <div className="col-span-3 flex flex-col gap-8 h-full overflow-hidden">
+        <div className="col-span-4 flex flex-col gap-8 h-full overflow-hidden">
            <div className="grid grid-cols-1 gap-8 shrink-0">
              <div className="glass-panel p-6 rounded-3xl flex flex-col items-center">
                 <PhDial ph={selectedTube?.ph || 7} />
