@@ -17,18 +17,18 @@ const PhDial = ({ ph }) => {
     <div className="flex flex-col items-center">
       <div className="relative w-48 h-24 flex items-end justify-center overflow-hidden">
         {/* Simple Arc */}
-        <div className="absolute bottom-0 w-40 h-20 border-t border-slate-200 rounded-t-full dark:border-slate-800" />
+        <div className="absolute bottom-0 w-40 h-20 border-t border-slate-800 rounded-t-full" />
         
         {/* Minimalist Needle */}
         <motion.div 
           animate={{ rotate: angle }}
           transition={{ type: "spring", stiffness: 60, damping: 15 }}
           style={{ originY: "100%" }}
-          className="absolute bottom-0 w-[1.5px] h-16 bg-slate-900 z-10 dark:bg-slate-100"
+          className="absolute bottom-0 w-[1.5px] h-16 bg-slate-100 z-10"
         />
 
         {/* Center Point */}
-        <div className="absolute bottom-[-4px] w-2 h-2 bg-slate-900 rounded-full z-20 dark:bg-slate-100" />
+        <div className="absolute bottom-[-4px] w-2 h-2 bg-slate-100 rounded-full z-20" />
       </div>
 
       <div className="mt-4 flex flex-col items-center">

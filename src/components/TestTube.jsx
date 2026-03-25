@@ -1,11 +1,25 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { EQUILIBRIUM_CONSTANTS } from '../lib/CoreChemicalEngine';
 import Precipitate from './Precipitate';
+import { TRANSLATIONS } from '../lib/translations';
 
-const TestTube = ({ tube, isSelected, onClick }) => {
+const TestTube = ({ tube, isSelected, onClick, language }) => {
   const config = EQUILIBRIUM_CONSTANTS[tube.type];
   const ratio = tube.equilibriumRatio || 0;
+  const t = TRANSLATIONS[language]?.tubes || { label: "Tubo" };
+
+  // Construír o título dinámico baseado no idioma
+  const getTranslatedTitle = () => {
+    let suffix = "";
+    if (tube.id === 1 || tube.id === 5) suffix = ` (${t.control})`;
+    else if (tube.id === 2) suffix = " (+HCl)";
+    else if (tube.id === 3) suffix = " (+NaOH)";
+    else if (tube.id === 4) suffix = ` (${t.extra})`;
+    else if (tube.id === 6) suffix = " (+NH3)";
+    
+    return `${t.label} ${tube.id}${suffix}`;
+  };
 
   return (
     <div 
@@ -13,7 +27,7 @@ const TestTube = ({ tube, isSelected, onClick }) => {
       className={`relative cursor-pointer flex flex-col items-center group ${isSelected ? 'z-20' : 'opacity-70 hover:opacity-100 transition-opacity'}`}
     >
       {/* Absolute Minimalist Shadow */}
-      <div className={`absolute -bottom-1 w-12 h-2 bg-slate-200 blur-md rounded-full transition-all duration-700 ${isSelected ? 'opacity-100 scale-125' : 'opacity-40'} dark:bg-black/40`} />
+      <div className={`absolute -bottom-2 w-16 h-3 bg-black/60 blur-xl rounded-full transition-all duration-700 ${isSelected ? 'opacity-100 scale-150' : 'opacity-40'}`} />
 
       {/* Glass Container - Ultra Clean */}
       <motion.div 
@@ -22,10 +36,11 @@ const TestTube = ({ tube, isSelected, onClick }) => {
           opacity: [0.8, 1, 0.8]
         } : {}}
         transition={{ duration: 0.3, repeat: tube.isMixing ? 4 : 0 }}
-        className={`relative w-14 h-44 rounded-b-full border border-slate-200 bg-white/40 backdrop-blur-sm overflow-hidden transition-all duration-700 ${isSelected ? 'border-primary ring-4 ring-primary/5 bg-white/60' : 'hover:border-slate-300'} dark:border-slate-800 dark:bg-slate-900/40`}
+        className={`relative w-16 h-56 rounded-b-full border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden transition-all duration-700 ${isSelected ? 'border-primary ring-[6px] ring-primary/20 bg-white/10' : 'hover:border-white/20'}`}
       >
         {/* Subtle Vertical Reflection */}
-        <div className="absolute top-0 right-3 w-[2px] h-full bg-white/20 blur-[1px]" />
+        <div className="absolute top-0 right-4 w-[3px] h-full bg-white/20 blur-[2px]" />
+        <div className="absolute top-0 left-3 w-[1px] h-full bg-white/10 blur-[1px]" />
         
         {/* Liquid */}
         <motion.div 
@@ -53,7 +68,7 @@ const TestTube = ({ tube, isSelected, onClick }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-10 bg-white/10 backdrop-blur-[1px] flex items-center justify-center"
+              className="absolute inset-0 z-10 bg-black/10 backdrop-blur-[1px] flex items-center justify-center"
             >
               <div className="w-1 h-1 bg-blue-500 rounded-full animate-ping" />
             </motion.div>
@@ -62,8 +77,8 @@ const TestTube = ({ tube, isSelected, onClick }) => {
       </motion.div>
 
       {/* Label */}
-      <div className={`mt-4 px-3 py-0.5 rounded-full text-[9px] font-bold tracking-tight transition-all uppercase ${isSelected ? 'bg-primary text-white' : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400'}`}>
-        {tube.title}
+      <div className={`mt-6 px-4 py-1.5 rounded-xl text-[11px] font-black tracking-[0.1em] transition-all uppercase shadow-lg ${isSelected ? 'bg-brand text-white border border-white/20' : 'bg-slate-900/80 text-slate-400 border border-white/5'}`}>
+        {getTranslatedTitle()}
       </div>
     </div>
   );

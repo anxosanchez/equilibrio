@@ -18,10 +18,10 @@ const LiveGraph = ({ tube }) => {
   return (
     <div className="w-full h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
-         <h3 className="text-[9px] font-black text-slate-500 uppercase tracking-[0.2em]">Concentración Real-Time</h3>
+         <h3 className="text-[11px] font-black text-slate-500 uppercase tracking-[0.2em]">Concentración Real-Time</h3>
          <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-brand animate-pulse" />
-            <span className="text-[8px] font-bold text-brand uppercase">Monitoring</span>
+            <span className="text-[10px] font-black text-brand uppercase tracking-widest">Monitoring</span>
          </div>
       </div>
       
@@ -41,8 +41,10 @@ const LiveGraph = ({ tube }) => {
               contentStyle={{ 
                 backgroundColor: '#0f172a', 
                 border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '12px',
-                fontSize: '10px'
+                borderRadius: '16px',
+                fontSize: '12px',
+                fontWeight: 'bold',
+                color: '#fff'
               }}
             />
             <Area 
