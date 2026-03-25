@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/equilibrio/',
+  base: process.env.BASE_URL || '/equilibrio/',
   plugins: [
     react(),
     tailwindcss(),
