@@ -8,13 +8,13 @@ const TheorySidebar = ({ currentStep, language, onAddReagent, tubeType }) => {
   const steps = t.sidebar.steps;
 
   return (
-    <div className="h-full flex flex-col gap-6 p-6 glass-panel rounded-3xl overflow-hidden self-start">
+    <div className="flex flex-col gap-6 p-6 glass-panel rounded-3xl overflow-hidden self-start">
       <div className="flex items-center gap-3 mb-2">
         <BookOpen className="w-5 h-5 text-blue-400" />
         <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">{t.sidebar.title}</h2>
       </div>
 
-      <div className="flex-grow space-y-4 overflow-y-auto pr-2 custom-scrollbar no-scrollbar">
+      <div className="space-y-4 overflow-y-auto pr-2 custom-scrollbar no-scrollbar">
         {steps.map((step, idx) => {
           const stepId = idx + 1;
           const isActive = stepId === currentStep;

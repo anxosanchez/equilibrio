@@ -203,7 +203,7 @@ const App = () => {
       <main className="flex-grow p-10 grid grid-cols-12 gap-10 max-w-[2400px] mx-auto w-full overflow-hidden">
         
         {/* Left: Theory Sidebar & Reagents */}
-        <aside className="col-span-4 h-full overflow-hidden flex flex-col gap-8">
+        <aside className="col-span-4 self-start overflow-hidden flex flex-col gap-8">
            <TheorySidebar 
              currentStep={currentStep} 
              language={language}
